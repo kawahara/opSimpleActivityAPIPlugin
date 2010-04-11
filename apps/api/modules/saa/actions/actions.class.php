@@ -96,7 +96,7 @@ class saaActions extends sfActions
     {
       return $this->getMemberIdByOAuth();
     }
-    if (sfConfig::get('op_saa_use_basic_auth', true))
+    if (sfConfig::get('op_saa_use_basic_auth', false))
     {
       return $this->getMemberIdByBasic();
     }
@@ -110,8 +110,8 @@ class saaActions extends sfActions
       'status' => new opValidatorString(array('required' => true, 'trim' => true, 'max_length' => 140)),
     );
     $params = $this->validate($validators);
-    Doctrine::getTable('ActivityData')->updateActivity($memberId, $params['status']);
-    return $this->render(array());
+    $activity = Doctrine::getTable('ActivityData')->updateActivity($memberId, $params['status']);
+    return $this->render(array('status' => opActivityDataConverter::activityToStatus($activity)));
   }
 
   public function executeBasicAuth(sfWebRequest $request)
