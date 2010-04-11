@@ -1,0 +1,10 @@
+api_statuses_update:
+  class: sfRequestRoute
+  url: /statuses/update.:format
+  param: { module: saa, action: statusesUpdate }
+  requirements: { sf_method: [get, post], format: "^(json|xml)$" }
+
+api_saa_deny:
+  class: sfRequestRoute
+  url: /saa/*
+  param: { module: saa, action: error404 }
