@@ -17,8 +17,42 @@ class opSaaExportXml extends opSaaExport
     {
       if (is_array($data))
       {
-        $element = $this->domDocument->createElement($key);
-        $this->arrayToXml($data, $element);
+        $elementKeys = array_keys($data);
+        $elementKey  = $elementKeys[0];
+
+        if (is_numeric($key))
+        {
+          if (count($data) > 1)
+          {
+            throw new RuntimeException();
+          }
+
+          $dData = $data[$elementKey];
+
+          if (is_numeric($elementKey))
+          {
+            throw new RuntimeException();
+          }
+
+          if (is_array($dData))
+          {
+            $element = $this->domDocument->createElement($elementKey);
+            $this->arrayToXml($dData, $element);
+          }
+          else
+          {
+            $element = $this->domDocument->createElement($elementKey, $dData);
+          }
+        }
+        else
+        {
+          $element = $this->domDocument->createElement($key);
+          if (is_numeric($elementKey))
+          {
+            $element->setAttribute('type', 'array');
+          }
+          $this->arrayToXml($data, $element);
+        }
       }
       else
       {
