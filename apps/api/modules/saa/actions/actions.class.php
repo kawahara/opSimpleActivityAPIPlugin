@@ -168,12 +168,13 @@ class saaActions extends sfActions
   {
     $memberId = $this->getMemberId();
     $validators = array(
-      'status' => new opValidatorString(array('required' => true, 'trim' => true, 'max_length' => 140)),
+      'status'    => new opValidatorString(array('required' => true, 'trim' => true, 'max_length' => 140)),
+      'term_user' => new sfValidatorBoolean(array('required' => false)),
     );
-    $params = $this->validate($validators);
+    $params = $this->validate($validators, array('term_user' => false));
     $activity = Doctrine::getTable('ActivityData')->updateActivity($memberId, $params['status']);
 
-    return $this->render(array('status' => opActivityDataConverter::activityToStatus($activity)));
+    return $this->render(array('status' => opActivityDataConverter::activityToStatus($activity, $params['term_user'])));
   }
 
 

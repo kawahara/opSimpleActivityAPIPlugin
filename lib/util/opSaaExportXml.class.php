@@ -25,7 +25,7 @@ class opSaaExportXml extends opSaaExport
 
         if (is_numeric($key) && 0 !== count($data))
         {
-          if (count($data) > 1)
+          if (1 < count($data))
           {
             throw new RuntimeException();
           }
