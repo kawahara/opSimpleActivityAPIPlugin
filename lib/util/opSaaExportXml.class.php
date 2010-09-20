@@ -50,7 +50,7 @@ class opSaaExportXml extends opSaaExport
         else
         {
           $element = $this->domDocument->createElement($key);
-          if (0 === count($data) || is_numeric($elementKey))
+          if ('statuses' === $key)
           {
             $element->setAttribute('type', 'array');
           }

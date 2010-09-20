@@ -9,18 +9,18 @@ $t->is($instance->export(array('foo' => array('foo' => 'bar'))), '<?xml version=
 <foo><foo>bar</foo></foo>
 ', '->export() returns string of XML');
 
-$t->is($instance->export(array('foo' => array(array('foo' => 'bar'), array('foo' => 'bar')))),
+$t->is($instance->export(array('statuses' => array(array('foo' => 'bar'), array('foo' => 'bar')))),
 '<?xml version="1.0" encoding="UTF-8"?>
-<foo type="array"><foo>bar</foo><foo>bar</foo></foo>
+<statuses type="array"><foo>bar</foo><foo>bar</foo></statuses>
 ', '->export() returns string of XML');
 
-$t->is($instance->export(array('foo' => array(array('foo' => array('foo' => 'bar')), array('foo' => 'bar')))),
+$t->is($instance->export(array('statuses' => array(array('foo' => array('foo' => 'bar')), array('foo' => 'bar')))),
 '<?xml version="1.0" encoding="UTF-8"?>
-<foo type="array"><foo><foo>bar</foo></foo><foo>bar</foo></foo>
+<statuses type="array"><foo><foo>bar</foo></foo><foo>bar</foo></statuses>
 ', '->export() returns string of XML');
 
-$t->is($instance->export(array('foo' => array())),
+$t->is($instance->export(array('statuses' => array())),
 '<?xml version="1.0" encoding="UTF-8"?>
-<foo type="array"/>
+<statuses type="array"/>
 ', '->export() returns string of XML');
 
