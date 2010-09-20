@@ -2,14 +2,23 @@
 
 class opActivityDataConverter
 {
-  static public function activityToStatus(ActivityData $activity)
+  static public function activityToStatus(ActivityData $activity, $isTermUser = false)
   {
-    return array(
+    $result = array(
       'created_at' => $activity->getCreatedAt(),
       'id' => $activity->getId(),
       'text' => $activity->getBody(),
-      'user' => self::memberToUser($activity->getMember())
     );
+    if ($isTermUser)
+    {
+      $result['user'] = array('id' => $activity->getMemberId());
+    }
+    else
+    {
+      $result['user'] = self::memberToUser($activity->getMember());
+    }
+
+    return $result;
   }
 
   static public function memberToUser(Member $member)

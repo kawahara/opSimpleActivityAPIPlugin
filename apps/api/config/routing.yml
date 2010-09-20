@@ -1,3 +1,21 @@
+#api_statuses_public_timeline:
+#  class: sfRequestRoute
+#  url: /statuses/public_timeline.:format
+#  param: { module: saa, action: statusesPublicTimeline }
+#  requirements: { sf_method: [get], format: "^(json|xml)$" }
+
+api_statuses_home_timeline:
+  class: sfRequestRoute
+  url: /statuses/home_timeline.:format
+  param: { module: saa, action: statusesHomeTimeline }
+  requirements: { sf_method: [get], format: "^(json|xml)$" }
+
+api_statuses_friends_timeline:
+  class: sfRequestRoute
+  url: /statuses/friends_timeline.:format
+  param: { module: saa, action: statusesHomeTimeline }
+  requirements: { sf_method: [get], format: "^(json|xml)$" }
+
 api_statuses_update:
   class: sfRequestRoute
   url: /statuses/update.:format
@@ -5,6 +23,6 @@ api_statuses_update:
   requirements: { sf_method: [post], format: "^(json|xml)$" }
 
 api_saa_deny:
-  class: sfRequestRoute
+  class: sfRoute
   url: /saa/*
   param: { module: saa, action: error404 }
