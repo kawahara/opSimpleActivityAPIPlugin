@@ -17,10 +17,13 @@ class opSaaExportXml extends opSaaExport
     {
       if (is_array($data))
       {
-        $elementKeys = array_keys($data);
-        $elementKey  = $elementKeys[0];
+        if (0 !== count($data))
+        {
+          $elementKeys = array_keys($data);
+          $elementKey  = $elementKeys[0];
+        }
 
-        if (is_numeric($key))
+        if (is_numeric($key) && 0 !== count($data))
         {
           if (count($data) > 1)
           {
@@ -47,7 +50,7 @@ class opSaaExportXml extends opSaaExport
         else
         {
           $element = $this->domDocument->createElement($key);
-          if (is_numeric($elementKey))
+          if (0 === count($data) || is_numeric($elementKey))
           {
             $element->setAttribute('type', 'array');
           }
